@@ -9,8 +9,14 @@
 
     async function handleSubmitProposal() {
         const newFeeE8s = BigInt(newFeeE8sString);
-
-        await submitProposal(newFeeE8s);
+        loading = true;
+        try {
+            await submitProposal(newFeeE8s);
+            dispatch("proposalSubmitted");
+        } finally {
+            loading = false;
+            newFeeE8sString = "";
+        }
     }
 </script>
 

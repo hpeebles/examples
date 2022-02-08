@@ -1,22 +1,29 @@
 <script lang="ts">
   import Auth from "./components/Auth.svelte";
-  import { identity } from "./stores/identity";
+  import {identity} from "./stores/identity";
   import Accordion from "./components/Accordion.svelte";
   import AccordionItem from "./components/AccordionItem.svelte";
   import Accounts from "./components/Accounts.svelte";
-  import { accounts } from "./stores/accounts";
-  import { listAccounts } from "./daoClient";
+  import {accounts} from "./stores/accounts";
+  import {listAccounts, listProposals} from "./daoClient";
   import Transfer from "./components/Transfer.svelte";
   import SubmitProposal from "./components/SubmitProposal.svelte";
+  import {proposals} from "./stores/proposals";
+  import Proposals from "./components/Proposals.svelte";
 
   $: isLoggedIn = !$identity.getPrincipal().isAnonymous();
 
   $: if (isLoggedIn) {
     refreshAccounts();
+    refreshProposals();
   }
 
   async function refreshAccounts() {
     accounts.set(await listAccounts());
+  }
+
+  async function refreshProposals() {
+    proposals.set(await listProposals());
   }
 
   let openedAccordion = undefined;
@@ -34,13 +41,19 @@
           <div slot="title" class="acc-header">
             <span class="valign-wrapper left">UserId</span>
           </div>
-          <span>{$identity.getPrincipal().toString()}</span>
+          <span class="user-id">{$identity.getPrincipal().toString()}</span>
         </AccordionItem>
         <AccordionItem id="accounts" isOpen={openedAccordion === "accounts"} on:toggleAccordion={toggleAccordion}>
           <div slot="title" class="acc-header">
             <span class="valign-wrapper left">Accounts</span>
           </div>
           <Accounts />
+        </AccordionItem>
+        <AccordionItem id="proposals" isOpen={openedAccordion === "proposals"} on:toggleAccordion={toggleAccordion}>
+          <div slot="title" class="acc-header">
+            <span class="valign-wrapper left">Proposals</span>
+          </div>
+          <Proposals on:voteCast={refreshProposals} />
         </AccordionItem>
         <AccordionItem id="transfer" isOpen={openedAccordion === "transfer"} on:toggleAccordion={toggleAccordion}>
           <div slot="title" class="acc-header">
@@ -52,7 +65,7 @@
           <div slot="title" class="acc-header">
             <span class="valign-wrapper left">Submit Proposal</span>
           </div>
-          <SubmitProposal />
+          <SubmitProposal on:proposalSubmitted={refreshProposals} />
         </AccordionItem>
       </Accordion>
     {/if}
@@ -63,13 +76,13 @@
   main {
     text-align: center;
     padding: 1em;
-    max-width: 360px;
+    max-width: none;
     margin: 0 auto;
   }
 
   .container {
     margin: auto;
-    width: 400px;
+    width: 700px;
   }
 
   h1 {
@@ -77,10 +90,6 @@
     font-size: 4em;
     font-weight: 100;
     margin-bottom: 20px;
-  }
-
-  main {
-    max-width: none;
   }
 
   .acc-header {

@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
-import type { Account as AccountType } from "../../../declarations/dao/dao.did";
+import type { Account } from "../../../declarations/dao/dao.did";
 
-export const accounts = writable([] as AccountType[]);
+export const accounts = writable([] as Account[]);

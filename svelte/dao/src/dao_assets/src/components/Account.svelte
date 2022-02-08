@@ -1,13 +1,24 @@
 <script lang="ts">
-    import type { Account as AccountType } from "../../../declarations/dao/dao.did";
+    import type { Account as Account } from "../../../declarations/dao/dao.did";
 
-    export let account: AccountType;
+    export let account: Account;
 </script>
 
 <div class="account">
-    <div>{account.owner.toString()}</div>
-    <div>{account.tokens.amount_e8s}</div>
+    <label>Address: <span>{account.owner.toString()}</span></label>
+    <label>Balance (E8s): <span>{account.tokens.amount_e8s}</span></label>
 </div>
 
 <style>
+    .account {
+        padding: 1rem;
+    }
+
+    .account:first-child {
+        padding-top: 0;
+    }
+
+    .account:last-child {
+        padding-bottom: 0;
+    }
 </style>

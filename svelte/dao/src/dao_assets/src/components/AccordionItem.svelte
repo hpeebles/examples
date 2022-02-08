@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { slide } from "svelte/transition";
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
@@ -19,7 +19,6 @@
 
 <style>
     .accordion-item {
-        display: flex;
         cursor: pointer;
         line-height: 1.5;
         padding: 1rem;

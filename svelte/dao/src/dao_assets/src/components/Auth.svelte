@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
   import { AuthClient } from "@dfinity/auth-client";
   import { onMount } from "svelte";
   import { identity } from "../stores/identity";
 
-  /** @type {AuthClient} */
-  let client;
+  let client: AuthClient;
 
   $: isLoggedIn = !$identity.getPrincipal().isAnonymous();
 
