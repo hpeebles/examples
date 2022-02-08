@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import inject from "rollup-plugin-inject";
+import json from "@rollup/plugin-json";
 import css from "rollup-plugin-css-only";
 import dev from "rollup-plugin-dev";
 import dfxJson from "../../dfx.json";
@@ -116,6 +117,7 @@ export default {
       Buffer: ["buffer", "Buffer"],
       process: "process/browser",
     }),
+    json(),
     replace(
       Object.assign(
         {

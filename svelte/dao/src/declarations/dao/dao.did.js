@@ -51,6 +51,7 @@ export const idlFactory = ({ IDL }) => {
     'transfer' : IDL.Func([TransferArgs], [Result_1], []),
     'update_system_params' : IDL.Func([UpdateSystemParamsPayload], [], []),
     'vote' : IDL.Func([VoteArgs], [Result], []),
+    'whoami' : IDL.Func([], [IDL.Principal], []),
   });
   return DAO;
 };

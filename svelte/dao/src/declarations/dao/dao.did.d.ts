@@ -11,6 +11,7 @@ export interface DAO {
       undefined
     >,
   'vote' : (arg_0: VoteArgs) => Promise<Result>,
+  'whoami' : () => Promise<Principal>,
 }
 export type List = [] | [[Principal, List]];
 export interface Proposal {
