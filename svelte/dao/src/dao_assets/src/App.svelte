@@ -14,6 +14,10 @@
   $: isLoggedIn = !$identity.getPrincipal().isAnonymous();
 
   $: if (isLoggedIn) {
+    refreshAll();
+  }
+
+  function refreshAll() {
     refreshAccounts();
     refreshProposals();
   }
@@ -36,6 +40,9 @@
   <div class="container">
     <Auth />
     {#if isLoggedIn}
+      <div>
+        <button on:click={refreshAll}>Refresh</button>
+      </div>
       <Accordion>
         <AccordionItem id="user-id" isOpen={openedAccordion === "user-id"} on:toggleAccordion={toggleAccordion}>
           <div slot="title" class="acc-header">
