@@ -1,21 +1,34 @@
 <script lang="ts">
-    import Account from "./Account.svelte";
     import { accounts } from "../stores/accounts";
 </script>
 
 <div class="accounts">
-    {#each $accounts as account, i}
-        <Account {account} />
-        {#if i < $accounts.length - 1}
-            <hr>
-        {/if}
-    {/each}
+    <table>
+        <tr>
+            <th>Account</th>
+            <th>Balance (E8s)</th>
+        </tr>
+        {#each $accounts as account}
+            <tr>
+                <td>{account.owner.toString()}</td>
+                <td>{account.tokens.amount_e8s}</td>
+            </tr>
+        {/each}
+    </table>
 </div>
 
 <style>
-    hr {
-        width: 25%;
-        border: 0;
-        border-top: 1px solid #ddd;
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 4px;
+    }
+
+    table {
+        margin: 0 auto;
+    }
+
+    td {
+        text-align: initial;
     }
 </style>

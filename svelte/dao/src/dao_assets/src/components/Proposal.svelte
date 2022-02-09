@@ -28,26 +28,52 @@
 </script>
 
 <div class="proposal">
-    <label>Id: <span>{proposal.id.toString()}</span></label>
-    <label>Proposer: <span>{proposal.proposer.toString()}</span></label>
-    <label>State: <span>{Object.keys(proposal.state)[0]}</span></label>
-    <label>Yes Votes: <span>{proposal.votes_yes.amount_e8s}</span></label>
-    <label>No Votes: <span>{proposal.votes_no.amount_e8s}</span></label>
-    <label>New Transfer Fee (E8s): <span>{payload.transfer_fee[0].amount_e8s}</span></label>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>{proposal.id.toString()}</td>
+        </tr>
+        <tr>
+            <td>Proposer</td>
+            <td>{proposal.proposer.toString()}</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>{Object.keys(proposal.state)[0]}</td>
+        </tr>
+        <tr>
+            <td>Yes Votes</td>
+            <td>{proposal.votes_yes.amount_e8s}</td>
+        </tr>
+        <tr>
+            <td>No Votes</td>
+            <td>{proposal.votes_no.amount_e8s}</td>
+        </tr>
+        <tr>
+            <td>New Transfer Fee (E8s)</td>
+            <td>{payload.transfer_fee[0].amount_e8s}</td>
+        </tr>
+    </table>
     <button disabled={!canVote} on:click={() => handleVote(true)}>Yes</button>
     <button disabled={!canVote} on:click={() => handleVote(false)}>No</button>
 </div>
 
 <style>
-    .proposal {
-        padding: 1rem;
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 4px;
     }
 
-    .proposal:first-child {
-        padding-top: 0;
+    table {
+        margin: 0 auto;
     }
 
-    .proposal:last-child {
-        padding-bottom: 0;
+    td {
+        text-align: initial;
+    }
+
+    button {
+        margin-top: 8px;
     }
 </style>

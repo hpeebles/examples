@@ -82,7 +82,7 @@
 
   .container {
     margin: auto;
-    width: 700px;
+    width: 800px;
   }
 
   h1 {
