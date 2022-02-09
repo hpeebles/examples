@@ -51,8 +51,6 @@ function initCanisterIds() {
       process.env.DFX_NETWORK ||
       (process.env.NODE_ENV === "production" ? "ic" : "local");
 
-  console.log(network);
-
   const canisterIds =
       network === "local"
           ? { ...(localCanisters || {}), ...(localIiCanister || {}) }
@@ -62,7 +60,8 @@ function initCanisterIds() {
 }
 const { canisterIds, network } = initCanisterIds();
 
-const production = !process.env.ROLLUP_WATCH;
+const watch = process.env.ROLLUP_WATCH
+const production = network === "ic";
 
 function serve() {
   return dev({
@@ -137,11 +136,11 @@ export default {
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated
-    !production && serve(),
+    watch && serve(),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
-    !production && livereload("public"),
+    watch && livereload("public"),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
