@@ -13,7 +13,7 @@
 
     let payload = decode(proposal.payload.message);
 
-    let canVote = "open" in proposal.state && !proposal.voters.some(([p, _]) => p === principal);
+    $: canVote = "open" in proposal.state && !proposal.voters.some(([p, _]) => p === principal);
     let loading = false;
 
     async function handleVote(yes: boolean) {

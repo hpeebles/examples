@@ -42,7 +42,7 @@ export const submitProposal = async (newTransferFeeE8s: bigint) => {
     };
 
     await buildActor().submit_proposal({
-        canister_id: Principal.fromText(process.env.DAO_CANISTER_ID),
+        canister_id: Principal.fromText(process.env.DAO_CANISTER_ID!),
         method: "update_system_params",
         message: encode(arg)
     })

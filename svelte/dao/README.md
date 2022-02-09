@@ -59,7 +59,7 @@ cd ../..
 To build and deploy the project run
 
 ```
-dfx deploy
+dfx deploy --argument '(null)'
 ```
 
 When the process completes you'll have a backend and a frontend canister running locally. To find the frontend canister's ID, run
@@ -68,7 +68,7 @@ When the process completes you'll have a backend and a frontend canister running
 dfx canister id dao_assets
 ```
 
-It will output something similar to `rno2w-sqaaa-aaaaa-aaacq-cai`. Copy this ID and open it in the browser using `http://localhost:8000?canisterId=<canister ID>`, eg. `http://localhost:8000?canisterId=rno2w-sqaaa-aaaaa-aaacq-cai`.
+It will output something similar to `rkp4c-7iaaa-aaaaa-aaaca-cai`. Copy this ID and open it in the browser using `http://localhost:8000?canisterId=<canister ID>`, eg. `http://localhost:8000?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai`.
 
 ## Local development
 
@@ -79,3 +79,15 @@ npm run dev
 ```
 
 from the project root directory, it is not necessary to deploy it to the frontend canister during development.
+
+## To get test tokens
+
+When you first use the app, the tokens will all be assigned to the principal you used when you deployed the app which is different to the one you get through Internet Identity. So you will need to send tokens from your dfx identity's principal to your Internet Identity principal.
+
+You can find your principal by clicking on the 'UserId' tab.
+
+To send tokens to your principal run the following command
+
+```
+dfx canister call dao transfer '(record { to=principal "<your principal>"; amount=record { amount_e8s=<amount> } })'
+```
