@@ -11,7 +11,7 @@
   "scripts": {
     "build": "cd ./src/dao_assets && rollup -c",
     "prebuild": "npm run copy:types",
-    "start": "webpack serve --mode development --env development",
+    "dev": "cd src/dao_assets && npm run dev",
     "prestart": "npm run copy:types",
     "copy:types": "rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/declarations"
   },

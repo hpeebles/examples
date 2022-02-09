@@ -82,7 +82,6 @@ type DAO =
    transfer: (TransferArgs) -> (Result_1);
    update_system_params: (UpdateSystemParamsPayload) -> ();
    vote: (VoteArgs) -> (Result);
-   whoami: () -> (principal);
  };
 type Account = 
  record {
